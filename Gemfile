@@ -55,5 +55,5 @@ gem 'sneakers'
 
 gem 'redis'
 gem 'redis-namespace'
-
+gem 'whenever'
 gem 'elasticsearch-model'
