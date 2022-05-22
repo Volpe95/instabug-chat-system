@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_19_221912) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_20_202751) do
   create_table "applications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "token"
     t.string "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_221912) do
   end
 
   create_table "chats", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "application_token"
     t.integer "chat_number"
     t.integer "messages_count"
     t.bigint "application_id", null: false
@@ -29,6 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_221912) do
   end
 
   create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "application_token"
+    t.integer "chat_number"
     t.integer "message_number"
     t.text "message_body"
     t.bigint "chat_id", null: false
