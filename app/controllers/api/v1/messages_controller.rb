@@ -42,17 +42,17 @@ class Api::V1::MessagesController < ApplicationController
 
     increment_messages_count(params[:token], params[:chat_number])
 
-    Publisher.publish('message',
+    Publisher.publish('worker',
                     {'message': @message.attributes.slice('application_token', 'chat_number', 'message_body', 'message_number', 'chat_id'),
-                    'action': 'create'}.to_json)
+                    'action': 'create.message'}.to_json)
 
     json_response({ message_number: @message.message_number }, :created)
   end
 
   # PUT /applications/:token/chats/:chat_number/messages/:message_number
   def update
-    Publisher.publish('message', 
-                        {'action': 'update',
+    Publisher.publish('worker', 
+                        {'action': 'update.message',
                           'message': {'application_token': params[:token],
                                       'chat_number': params[:chat_number], 
                                       'message_number': params[:message_number], 
@@ -63,8 +63,8 @@ class Api::V1::MessagesController < ApplicationController
 
   # DELETE /todos/:todo_id/items/:id
   def destroy
-    Publisher.publish(exchange = 'message', 
-                  message = {'action': 'destroy',
+    Publisher.publish(exchange = 'worker', 
+                  message = {'action': 'destroy.message',
                                 'message': {'application_token': params[:token],
                                             'chat_number': params[:chat_number], 
                                             'message_number': params[:message_number], 

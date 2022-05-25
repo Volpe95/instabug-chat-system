@@ -6,8 +6,6 @@ class MessagesWorker
   def work(payload)
     ActiveRecord::Base.connection_pool.with_connection do
       # convert the message into json object
-      puts "START"
-      puts payload
       payload_json = JSON.parse(payload)
       # Extract the `action` and the `message` object out of the message payload.
       action = payload_json['action']

@@ -67,7 +67,7 @@ services:
     depends_on:
       - api
     environment:
-      - WORKERS=ChatsWorker,MessagesWorker
+      - WORKERS=ChatsWorker,MessagesWorker,Worker
       - REDIS_HOST=redis
       - MYSQL_HOST=mysql
       - RABBITMQ_HOST=rabbitmq

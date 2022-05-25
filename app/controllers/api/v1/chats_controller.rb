@@ -31,9 +31,9 @@ class Api::V1::ChatsController < ApplicationController
     @chat.chat_number = get_new_chat_number params[:token]
     increment_chats_count params[:token]
 
-    Publisher.publish('chat',
+    Publisher.publish('worker',
                       { 'chat': @chat.attributes.slice('application_token', 'chat_number', 'application_id', 'messages_count'),
-                        'action': 'create' }.to_json)
+                        'action': 'create.chat' }.to_json)
 
     json_response({ chat_number: @chat.chat_number }, :created)
   end
@@ -48,9 +48,9 @@ class Api::V1::ChatsController < ApplicationController
   def destroy
     # TODO: -> Add to the task queue as well
 
-    Publisher.publish('chat',
+    Publisher.publish('worker',
                       { 'chat': { 'token': params[:token], 'chat_number': params[:chat_number] },
-                        'action': 'destroy' }.to_json)
+                        'action': 'destroy.chat' }.to_json)
     decrement_chats_count params[:token]
     head :no_content
   end

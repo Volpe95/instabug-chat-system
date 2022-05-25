@@ -3,11 +3,11 @@
 This repository contains both the problem statement and my solution to the `Instabug Backend Challenge` which was sent to me as a part of the process for my application for the `Backend Engineer` role at [Instabug](https://www.instabug.com/). 
 
 # Table of Contents
-- [Problem Statement](#)
-- [Solution Discussion](#)
-- [Installation Instructions](#)
-- [API Endpoints](#)
-
+- [Problem Statement](#problem-statement)
+- [Solution Discussion](#solution-discussion)
+- [Installation Instructions](#installation-instructions)
+- [API Endpoints](#api-endpoints)
+- [TODO](#todo)
 
 
 # Problem Statement 
@@ -105,7 +105,7 @@ requests(especially for the chats and messages creation endpoints). You can use 
 system to achieve that. It is allowed for chats and messages to take time to be persisted.
 
 
-Again `Redis` was of a great help here using the `PubSub Scheme` inside `RabbitMQ`,so for any `create`, `update` or `destroy` we only validate the request then throw it into a queue to be consumed using background workers (chats worker and message worker) for executing the operations into the MYSQL database.
+`PubSub Scheme` inside `RabbitMQ` was used, so for any `create`, `update` or `destroy` we only validate the request then throw it into a queue to be consumed using background workers (chats worker and message worker) for executing the operations into the MYSQL database.
 
 
 > Add an endpoint for searching through messages of a specific chat. It should be able to partially match messages’ bodies. You must use ElasticSearch for this.
@@ -203,3 +203,9 @@ curl -X DELETE  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8z
 ```sh
 curl -X GET  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9/chats/1/messages/search?query=search_pattern
 ```
+
+
+# TODO 
+- Fix The error with the workers (only one consumer getting the work now). 
+- Add code specs (Model specs was added we need to test the API as well).
+- Handle more unhappy cases and exceptions for the user requests.
