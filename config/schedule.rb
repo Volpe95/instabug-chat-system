@@ -25,7 +25,7 @@ ENV.each_key do |key|
   env key.to_sym, ENV[key]
 end
 
-every 1.minute do
+every 55.minute do
   rake 'update_counts:messages'
   rake 'update_counts:chats'
 end

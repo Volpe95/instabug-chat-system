@@ -134,56 +134,72 @@ The API will be listening on port `4000`
 
 ### Application Endpoints: 
 
-- Get all available applications.
+- Get all available applications. `GET /api/v1/applications` 
 ```sh
+curl -X GET  http://localhost:4000/api/v1/applications
 ```
-- Create a new application.
+
+- Get a specific application using the application token. `GET /api/v1/applications/:token`
 ```sh
+ curl -X GET  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9
 ```
-- Update the name of an existing application. 
+
+- Create a new application. `POST /api/v1/applications` 
 ```sh
+curl -X POST  http://localhost:4000/api/v1/applications?name=instagram-chat
 ```
-- Delete an application. 
+- Update the name of an existing application. `PUT /api/v1/applications/:token`
 ```sh
+curl -X PUT  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9?name=instabug-chat
 ```
-- Get a specific application using the application token. 
+- Delete an application. `DELETE /api/v1/applications/:token`
 ```sh
+curl -X DELETE  http://localhost:4000/api/v1/applications/p9VktkiF5m1Fz2TG1bXXdS3D
 ```
 ### Chat Endpoints: 
 
-- Get all available chats for a specific application.
+- Get all available chats for a specific application. `GET /api/v1/applications/:token/chats`
 ```sh
+curl -X GET  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9/chats
 ```
-- Get a specific chat.
+- Get a specific chat. `GET /api/v1/applications/:token/chats/:chat_number`
 ```sh
+curl -X GET  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9/chats/1
 ```
-- Create a new chat.
+- Create a new chat. `POST /api/v1/applications/:token/chats`
 ```sh
+curl -X POST  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9/ch
+ats
 ```
-- Update existing chat (Will do nothing as there is not any attribute the user can edit).
+- Delete a chat. `DELETE /api/v1/applications/:token/chats/:chat_number`
 ```sh
-```
-- Delete a chat. 
-```sh
+curl -X DELETE  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9/
+chats/1
 ```
 ### Message Endpoints: 
 
-- Get all messages of a specific chat.
+- Get all messages of a specific chat. `GET /applications/:token/chats/:chat_number/messages`
 ```sh
+curl -X GET  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9/chats/1/messages
 ```
-- Get a specific message.
+- Get a specific message. `GET /applications/:token/chats/:chat_number/messages/:message_number`
 ```sh
+curl -X GET  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9/chats/1/messages/1
 ```
-- Create a new message.
+- Create a new message. `POST /applications/:token/chats/:chat_number/message`
 ```sh
+curl -X POST  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9/chats/1/messages?message_body=Hey!
 ```
-- Update existing message
+- Update existing message `PUT /applications/:token/chats/:chat_number/messages/:message_number`
 ```sh
+curl -X PUT  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9/chats/1/messages/1?message_body=Hola!
 ```
-- Delete a message. 
+- Delete a message. `DELETE /todos/:todo_id/items/:id` 
 ```sh
+curl -X DELETE  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9/chats/1/messages/1
 ```
 
-- Search for a message within a certain chat. 
+- Search for a message within a certain chat. `GET /applications/:token/chats/:chat_number/messages/search` 
 ```sh
+curl -X GET  http://localhost:4000/api/v1/applications/FgxLAPzvCZ9qq7BPPjRL8zd9/chats/1/messages/search?query=search_pattern
 ```

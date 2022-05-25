@@ -25,7 +25,7 @@ class Api::V1::ChatsController < ApplicationController
 
     @chat = Chat.new({ application_token: params[:token], chat_number: 0, messages_count: 0 }) # Chat number is zero to be used in validation for now only.
     @chat.application = @application
-
+    puts @chat.attributes
     raise ActiveRecord::RecordInvalid, @chat unless @chat.valid?
 
     @chat.chat_number = get_new_chat_number params[:token]
