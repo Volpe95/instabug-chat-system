@@ -19,9 +19,13 @@
 
 # Learn more: http://github.com/javan/whenever
 
-#FixME change this to be each 55 minutes. (to make sure it's peresisted before 1 hour)
-every 1.minute do
-    rake 'update_counts:messages'
-    rake 'update_counts:chats'
+# FIXME: change this to be each 55 minutes. (to make sure it's peresisted before 1 hour)
+
+ENV.each_key do |key|
+  env key.to_sym, ENV[key]
 end
-  
+
+every 1.minute do
+  rake 'update_counts:messages'
+  rake 'update_counts:chats'
+end

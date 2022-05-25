@@ -14,9 +14,9 @@ default: &default
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
-  host: localhost
-
+  password: root
+  host: mysql
+  # socket: /var/run/mysqld/mysqld.sock
 development:
   <<: *default
   database: instabug_chat_system_development
@@ -51,5 +51,5 @@ test:
 production:
   <<: *default
   database: instabug_chat_system_production
-  username: instabug_chat_system
-  password: <%= ENV["instabug_chat_SYSTEM_DATABASE_PASSWORD"] %>
+  # username: instabug_chat_system
+  # password: <%= ENV["instabug_chat_SYSTEM_DATABASE_PASSWORD"] %>

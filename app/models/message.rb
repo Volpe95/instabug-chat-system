@@ -4,10 +4,10 @@ class Message < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  index_name Rails.application.class.parent_name.underscore
-  document_type self.name.downcase
+  index_name 'chatsystem_message'
+  document_type 'message'
 
-  #Number of shreds is set to low value for now to avoid large memory consumption.
+  # Number of shards is set to low value for now to avoid large memory consumption  
   settings index: { number_of_shards: 1 } do
     mapping dynamic: false do
       indexes :message_body, analyzer: 'standard'
@@ -19,7 +19,7 @@ class Message < ApplicationRecord
       {
         query: {
           query_string: {
-            query: "*" + query + "*" ,
+            query: '*' + query + '*',
             fields: ['message_body']
           }
         },
@@ -27,10 +27,7 @@ class Message < ApplicationRecord
     )
   end
 
-
-
-  def as_indexed_json(options = nil)
-    self.as_json( only: [ :message_body ] )
+  def as_indexed_json(_options = nil)
+    as_json(only: [:message_body])
   end
-
 end

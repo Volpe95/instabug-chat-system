@@ -10,36 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_20_202751) do
-  create_table "applications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "token"
-    t.string "name"
-    t.integer "chats_count"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+ActiveRecord::Schema[7.0].define(version: 20_220_520_202_751) do
+  create_table 'applications', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.string 'token'
+    t.string 'name'
+    t.integer 'chats_count'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "chats", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "application_token"
-    t.integer "chat_number"
-    t.integer "messages_count"
-    t.bigint "application_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["application_id"], name: "index_chats_on_application_id"
+  create_table 'chats', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.string 'application_token'
+    t.integer 'chat_number'
+    t.integer 'messages_count'
+    t.bigint 'application_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['application_id'], name: 'index_chats_on_application_id'
   end
 
-  create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "application_token"
-    t.integer "chat_number"
-    t.integer "message_number"
-    t.text "message_body"
-    t.bigint "chat_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_id"], name: "index_messages_on_chat_id"
+  create_table 'messages', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.string 'application_token'
+    t.integer 'chat_number'
+    t.integer 'message_number'
+    t.text 'message_body'
+    t.bigint 'chat_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['chat_id'], name: 'index_messages_on_chat_id'
   end
 
-  add_foreign_key "chats", "applications"
-  add_foreign_key "messages", "chats"
+  add_foreign_key 'chats', 'applications'
+  add_foreign_key 'messages', 'chats'
 end
